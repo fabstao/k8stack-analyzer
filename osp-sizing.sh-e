@@ -6,7 +6,7 @@
 # ******************************************************
 
 
-output="rhosp-assessment.out"
+output="rhosp-assessment.md"
 echo > $output
 
 function spacedel {

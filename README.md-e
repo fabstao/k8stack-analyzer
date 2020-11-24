@@ -25,8 +25,8 @@ oc cluster-info dump > cluster.dump
 ## Resultados
 
 Se generan tres archivos, se pueden comprimir considerablemente ya que sólo son salidas de texto.
-* output="rhosp-assessment.out"
-* output="rs-ocp-assessment.out"
+* output="rhosp-assessment.md"
+* output="rs-ocp-assessment.md"
 * y la salida de cluster-info: cluster.dump
 
 ## Autor
