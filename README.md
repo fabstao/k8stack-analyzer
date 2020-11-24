@@ -4,10 +4,10 @@
 
 ### For Openstack
 
+Este comando puede poner carga media a las controladoras de Openstack, no afecta servicios
 ```
 time nice -n 19 ./osp-sizing.sh
 ```
-Este comando puede poner carga media a las controladoras de Openstack, no afecta servicios
 
 
 ### For Openshift
