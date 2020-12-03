@@ -6,7 +6,7 @@
 # ******************************************************
 
 
-output="rs-ocp-assessment.out"
+output="rs-kubectlp-assessment.out"
 echo > $output
 
 function spacedel {
@@ -18,7 +18,7 @@ function outlabel {
 }
 
 function crashedpods {
-	crashed=$(oc get pods -n $1 | egrep -i "(loop|error|pending|waiting)")
+	crashed=$(kubectl get pods -n $1 | egrep -i "(loop|error|pending|waiting)")
 	spacedel
 	outlabel "*Pods con fallas on $1*"
 	spacedel
@@ -26,7 +26,7 @@ function crashedpods {
 	for i in $crashed
 	do
 		echo "Pod $i"
-		oc logs $i >> $output
+		kubectl logs $i >> $output
 	done		
 	outlabel "\`\`\`"
 }
@@ -36,61 +36,61 @@ echo "Iniciando..."
 outlabel "# OPENSHIFT ASSESSMENT - RACKSPACE"
 spacedel
 outlabel "\`\`\` "
-oc whoami -c >> $output
+kubectl whoami -c >> $output
 outlabel "\`\`\` "
 spacedel
 outlabel "## OCP get nodes"
 spacedel
 outlabel "### NODOS"
 spacedel
-oc get nodes -o wide >> $output
+kubectl get nodes -o wide >> $output
 spacedel
 
 outlabel "### Kubernetes config view"
 spacedel
 outlabel "\`\`\`"
-oc config view >> $output
+kubectl config view >> $output
 outlabel "\`\`\`"
 spacedel
 
 outlabel "### Kubernetes get pods"
 spacedel
 outlabel "\`\`\`"
-oc get pods -o wide --all-namespaces >> $output
+kubectl get pods -o wide --all-namespaces >> $output
 outlabel "\`\`\`"
 spacedel
 
 outlabel "### Kubernetes get deployment configs"
 spacedel
 outlabel "\`\`\`"
-oc get dc  --all-namespaces >> $output
+kubectl get dc  --all-namespaces >> $output
 outlabel "\`\`\`"
 spacedel
 
 outlabel "### Kubernetes services"
 spacedel
 outlabel "\`\`\`"
-oc get service -o wide --all-namespaces >> $output
+kubectl get service -o wide --all-namespaces >> $output
 outlabel "\`\`\`"
 spacedel
 
-outlabel "### Openshift ImageStreams"
+outlabel "### Kubernetes ImageStreams"
 spacedel
 outlabel "\`\`\`"
-oc get is --all-namespaces >> $output
+kubectl get is --all-namespaces >> $output
 outlabel "\`\`\`"
 spacedel
 
-outlabel "### Openshift BuildConfigs"
+outlabel "### Kubernetes BuildConfigs"
 spacedel
 outlabel "\`\`\`"
-oc get bc --all-namespaces >> $output
+kubectl get bc --all-namespaces >> $output
 outlabel "\`\`\`"
 spacedel
 
 outlabel "### Buscando fallas en pods"
 spacedel
-projects=$(oc get namespaces | awk '/NAME/ {next;} {print $1}')
+projects=$(kubectl get namespaces | awk '/NAME/ {next;} {print $1}')
 for i in $projects
 do
 	crashedpods $i	
