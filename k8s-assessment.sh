@@ -33,7 +33,7 @@ function crashedpods {
 
 echo "Iniciando..."
 
-outlabel "# OPENSHIFT ASSESSMENT - RACKSPACE"
+outlabel "# Kubernetes Assessment - RACKSPACE"
 spacedel
 outlabel "\`\`\` "
 kubectl whoami -c >> $output
@@ -60,33 +60,33 @@ kubectl get pods -o wide --all-namespaces >> $output
 outlabel "\`\`\`"
 spacedel
 
-outlabel "### Kubernetes get deployment configs"
+outlabel "### Kubernetes get deployments"
 spacedel
 outlabel "\`\`\`"
-kubectl get dc  --all-namespaces >> $output
+kubectl get deployments -o wide  --all-namespaces >> $output
 outlabel "\`\`\`"
 spacedel
 
 outlabel "### Kubernetes services"
 spacedel
 outlabel "\`\`\`"
-kubectl get service -o wide --all-namespaces >> $output
+kubectl get svc -o wide --all-namespaces >> $output
 outlabel "\`\`\`"
 spacedel
 
-outlabel "### Kubernetes ImageStreams"
-spacedel
-outlabel "\`\`\`"
-kubectl get is --all-namespaces >> $output
-outlabel "\`\`\`"
-spacedel
+#outlabel "### Kubernetes ImageStreams"
+#spacedel
+#outlabel "\`\`\`"
+#kubectl get is --all-namespaces >> $output
+#outlabel "\`\`\`"
+#spacedel
 
-outlabel "### Kubernetes BuildConfigs"
-spacedel
-outlabel "\`\`\`"
-kubectl get bc --all-namespaces >> $output
-outlabel "\`\`\`"
-spacedel
+#outlabel "### Kubernetes BuildConfigs"
+#spacedel
+#outlabel "\`\`\`"
+#kubectl get bc --all-namespaces >> $output
+#outlabel "\`\`\`"
+#spacedel
 
 outlabel "### Buscando fallas en pods"
 spacedel

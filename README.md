@@ -16,32 +16,32 @@ time nice -n 19 ./osp-sizing.sh
 ```
 
 
-### For Openshift
+### For Kubernetes
 
-Hacer login en Openshift, se puede dar "copy login command" en el portal o hacer:
+Hacer login en Kubernetes, se puede dar "copy login command" en el portal o hacer:
 
 ```
-oc login
+kubectl login
 ```
 
 Se requieren permisos de cluster-admin
 
 
-Este comando genera una carga pequeña en las controladoras de Openshift, no afecta servicios
+Este comando genera una carga pequeña en las controladoras de Kubernetes, no afecta servicios
 ```
-time ./ocp-assessment.sh
+time ./kubectlp-assessment.sh
 ```
 
-Este comando puede poner carga media a las controladoras de Openshift, no afecta servicios:
+Este comando puede poner carga media a las controladoras de Kubernetes, no afecta servicios:
 ```
-oc cluster-info dump > cluster.dump
+kubectl cluster-info dump > cluster.dump
 ```
 
 ## Resultados
 
 Se generan tres archivos, se pueden comprimir considerablemente ya que sólo son salidas de texto.
-* output="rhosp-assessment.out"
-* output="rs-ocp-assessment.out"
+* output="osp-assessment.out"
+* output="k8s-assessment.out"
 * y la salida de cluster-info: cluster.dump
 
 ## Autor
