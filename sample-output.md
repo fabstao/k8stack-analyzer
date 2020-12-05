@@ -5,9 +5,11 @@
 
 ### NODOS
 
+```
 NAME    STATUS   ROLES                      AGE     VERSION    INTERNAL-IP      EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION          CONTAINER-RUNTIME
-rkem1   Ready    controlplane,etcd,worker   3h48m   v1.17.14   192.168.16.133   <none>        Debian GNU/Linux 10 (buster)   4.19.0-12-cloud-amd64   docker://18.9.1
-rkew1   Ready    worker                     3h42m   v1.17.14   192.168.16.132   <none>        Debian GNU/Linux 10 (buster)   4.19.0-12-cloud-amd64   docker://18.9.1
+rkem1   Ready    controlplane,etcd,worker   3h51m   v1.17.14   192.168.16.133   <none>        Debian GNU/Linux 10 (buster)   4.19.0-12-cloud-amd64   docker://18.9.1
+rkew1   Ready    worker                     3h45m   v1.17.14   192.168.16.132   <none>        Debian GNU/Linux 10 (buster)   4.19.0-12-cloud-amd64   docker://18.9.1
+```
 
 ### Kubernetes config view
 
@@ -37,46 +39,46 @@ users:
 
 ```
 NAMESPACE       NAME                                      READY   STATUS      RESTARTS   AGE     IP               NODE    NOMINATED NODE   READINESS GATES
-ingress-nginx   default-http-backend-67cf578fc4-wczwc     1/1     Running     0          3h47m   172.18.0.2       rkem1   <none>           <none>
-ingress-nginx   nginx-ingress-controller-cf8q8            1/1     Running     0          3h47m   192.168.16.133   rkem1   <none>           <none>
-ingress-nginx   nginx-ingress-controller-j5brd            1/1     Running     0          3h41m   192.168.16.132   rkew1   <none>           <none>
-kube-system     canal-qnqm9                               2/2     Running     0          3h48m   192.168.16.133   rkem1   <none>           <none>
-kube-system     canal-xzdqw                               2/2     Running     0          3h42m   192.168.16.132   rkew1   <none>           <none>
-kube-system     coredns-7c5566588d-5bnn8                  0/1     Running     0          3h41m   172.18.1.2       rkew1   <none>           <none>
-kube-system     coredns-7c5566588d-ctzdv                  1/1     Running     0          3h48m   172.18.0.3       rkem1   <none>           <none>
-kube-system     coredns-autoscaler-65bfc8d47d-rgl62       1/1     Running     0          3h48m   172.18.0.4       rkem1   <none>           <none>
-kube-system     metrics-server-6b55c64f86-dfgls           1/1     Running     0          3h47m   172.18.0.5       rkem1   <none>           <none>
-kube-system     rke-coredns-addon-deploy-job-h8m6x        0/1     Completed   0          3h48m   192.168.16.133   rkem1   <none>           <none>
-kube-system     rke-ingress-controller-deploy-job-7wwtz   0/1     Completed   0          3h47m   192.168.16.133   rkem1   <none>           <none>
-kube-system     rke-metrics-addon-deploy-job-qbktl        0/1     Completed   0          3h47m   192.168.16.133   rkem1   <none>           <none>
-kube-system     rke-network-plugin-deploy-job-mczr2       0/1     Completed   0          3h48m   192.168.16.133   rkem1   <none>           <none>
+ingress-nginx   default-http-backend-67cf578fc4-wczwc     1/1     Running     0          3h49m   172.18.0.2       rkem1   <none>           <none>
+ingress-nginx   nginx-ingress-controller-cf8q8            1/1     Running     0          3h49m   192.168.16.133   rkem1   <none>           <none>
+ingress-nginx   nginx-ingress-controller-j5brd            1/1     Running     0          3h44m   192.168.16.132   rkew1   <none>           <none>
+kube-system     canal-qnqm9                               2/2     Running     0          3h51m   192.168.16.133   rkem1   <none>           <none>
+kube-system     canal-xzdqw                               2/2     Running     0          3h45m   192.168.16.132   rkew1   <none>           <none>
+kube-system     coredns-7c5566588d-5bnn8                  0/1     Running     0          3h44m   172.18.1.2       rkew1   <none>           <none>
+kube-system     coredns-7c5566588d-ctzdv                  1/1     Running     0          3h50m   172.18.0.3       rkem1   <none>           <none>
+kube-system     coredns-autoscaler-65bfc8d47d-rgl62       1/1     Running     0          3h50m   172.18.0.4       rkem1   <none>           <none>
+kube-system     metrics-server-6b55c64f86-dfgls           1/1     Running     0          3h50m   172.18.0.5       rkem1   <none>           <none>
+kube-system     rke-coredns-addon-deploy-job-h8m6x        0/1     Completed   0          3h51m   192.168.16.133   rkem1   <none>           <none>
+kube-system     rke-ingress-controller-deploy-job-7wwtz   0/1     Completed   0          3h50m   192.168.16.133   rkem1   <none>           <none>
+kube-system     rke-metrics-addon-deploy-job-qbktl        0/1     Completed   0          3h50m   192.168.16.133   rkem1   <none>           <none>
+kube-system     rke-network-plugin-deploy-job-mczr2       0/1     Completed   0          3h51m   192.168.16.133   rkem1   <none>           <none>
 ```
 
 ### Kubernetes get deployments
 
 ```
 NAMESPACE       NAME                   READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS             IMAGES                                                         SELECTOR
-ingress-nginx   default-http-backend   1/1     1            1           3h47m   default-http-backend   rancher/nginx-ingress-controller-defaultbackend:1.5-rancher1   app=default-http-backend
-kube-system     coredns                1/2     2            1           3h48m   coredns                rancher/coredns-coredns:1.6.5                                  k8s-app=kube-dns
-kube-system     coredns-autoscaler     1/1     1            1           3h48m   autoscaler             rancher/cluster-proportional-autoscaler:1.7.1                  k8s-app=coredns-autoscaler
-kube-system     metrics-server         1/1     1            1           3h47m   metrics-server         rancher/metrics-server:v0.3.6                                  k8s-app=metrics-server
+ingress-nginx   default-http-backend   1/1     1            1           3h49m   default-http-backend   rancher/nginx-ingress-controller-defaultbackend:1.5-rancher1   app=default-http-backend
+kube-system     coredns                1/2     2            1           3h50m   coredns                rancher/coredns-coredns:1.6.5                                  k8s-app=kube-dns
+kube-system     coredns-autoscaler     1/1     1            1           3h50m   autoscaler             rancher/cluster-proportional-autoscaler:1.7.1                  k8s-app=coredns-autoscaler
+kube-system     metrics-server         1/1     1            1           3h50m   metrics-server         rancher/metrics-server:v0.3.6                                  k8s-app=metrics-server
 ```
 
 ### Kubernetes services
 
 ```
 NAMESPACE       NAME                   TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                  AGE     SELECTOR
-default         kubernetes             ClusterIP   172.19.0.1       <none>        443/TCP                  3h49m   <none>
-ingress-nginx   default-http-backend   ClusterIP   172.19.182.46    <none>        80/TCP                   3h47m   app=default-http-backend
-kube-system     kube-dns               ClusterIP   172.19.0.10      <none>        53/UDP,53/TCP,9153/TCP   3h48m   k8s-app=kube-dns
-kube-system     metrics-server         ClusterIP   172.19.108.245   <none>        443/TCP                  3h47m   k8s-app=metrics-server
+default         kubernetes             ClusterIP   172.19.0.1       <none>        443/TCP                  3h51m   <none>
+ingress-nginx   default-http-backend   ClusterIP   172.19.182.46    <none>        80/TCP                   3h49m   app=default-http-backend
+kube-system     kube-dns               ClusterIP   172.19.0.10      <none>        53/UDP,53/TCP,9153/TCP   3h50m   k8s-app=kube-dns
+kube-system     metrics-server         ClusterIP   172.19.108.245   <none>        443/TCP                  3h50m   k8s-app=metrics-server
 ```
 
 ### Kubernetes metrics
 
 ```
 NAME    CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%     
-rkem1   245m         6%     1687Mi          21%         
+rkem1   232m         5%     1688Mi          21%         
 rkew1   <unknown>                           <unknown>               <unknown>               <unknown>               
 ```
 ```
@@ -84,7 +86,7 @@ NAMESPACE       NAME                                    CPU(cores)   MEMORY(byte
 ingress-nginx   default-http-backend-67cf578fc4-wczwc   1m           4Mi             
 ingress-nginx   nginx-ingress-controller-cf8q8          3m           91Mi            
 kube-system     canal-qnqm9                             30m          31Mi            
-kube-system     coredns-7c5566588d-ctzdv                6m           11Mi            
+kube-system     coredns-7c5566588d-ctzdv                4m           11Mi            
 kube-system     coredns-autoscaler-65bfc8d47d-rgl62     1m           7Mi             
 kube-system     metrics-server-6b55c64f86-dfgls         1m           12Mi            
 ```
