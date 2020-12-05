@@ -18,14 +18,7 @@ time nice -n 19 ./ostack-assessment.sh
 
 ### For Kubernetes
 
-Hacer login en Kubernetes, se puede dar "copy login command" en el portal o hacer:
-
-```
-kubectl login
-```
-
-Se requieren permisos de cluster-admin
-
+Se requiere un kubeconfig con permisos de cluster-admin.
 
 Este comando genera una carga pequeña en las controladoras de Kubernetes, no afecta servicios
 ```

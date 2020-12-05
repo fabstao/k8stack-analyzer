@@ -35,7 +35,7 @@ echo "Iniciando..."
 
 outlabel "# Kubernetes Assessment - RACKSPACE"
 spacedel
-outlabel "## OCP get nodes"
+outlabel "## Kubernetes get nodes"
 spacedel
 outlabel "### NODOS"
 spacedel
