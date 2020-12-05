@@ -6,7 +6,7 @@
 # ******************************************************
 
 
-output="rhosp-assessment.out"
+output="rs-ostack-assessment.out"
 echo > $output
 
 function spacedel {
@@ -18,7 +18,7 @@ function outlabel {
 }
 
 
-outlabel "# Red Hat Openstack Assessment" 
+outlabel "# Openstack Assessment - Rackspace" 
 spacedel
 outlabel "## Openstack projects/tenants"
 outlabel "\`\`\`"

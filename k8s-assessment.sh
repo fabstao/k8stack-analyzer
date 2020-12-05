@@ -6,7 +6,7 @@
 # ******************************************************
 
 
-output="rs-kubectlp-assessment.out"
+output="rs-kubectl-assessment.out"
 echo > $output
 
 function spacedel {
@@ -34,10 +34,6 @@ function crashedpods {
 echo "Iniciando..."
 
 outlabel "# Kubernetes Assessment - RACKSPACE"
-spacedel
-outlabel "\`\`\` "
-kubectl whoami -c >> $output
-outlabel "\`\`\` "
 spacedel
 outlabel "## OCP get nodes"
 spacedel
@@ -74,21 +70,24 @@ kubectl get svc -o wide --all-namespaces >> $output
 outlabel "\`\`\`"
 spacedel
 
-#outlabel "### Kubernetes ImageStreams"
-#spacedel
-#outlabel "\`\`\`"
-#kubectl get is --all-namespaces >> $output
-#outlabel "\`\`\`"
-#spacedel
+outlabel "### Kubernetes metrics"
+spacedel
+outlabel "\`\`\`"
+kubectl top nodes  >> $output
+outlabel "\`\`\`"
+outlabel "\`\`\`"
+kubectl top pods --all-namespaces  >> $output
+outlabel "\`\`\`"
+spacedel
 
-#outlabel "### Kubernetes BuildConfigs"
-#spacedel
-#outlabel "\`\`\`"
-#kubectl get bc --all-namespaces >> $output
-#outlabel "\`\`\`"
-#spacedel
+outlabel "### Kubernetes enabled APIs"
+spacedel
+outlabel "\`\`\`"
+kubectl api-resources -o wide  >> $output
+outlabel "\`\`\`"
+spacedel
 
-outlabel "### Buscando fallas en pods"
+outlabel "### Checking logs from failed pods"
 spacedel
 projects=$(kubectl get namespaces | awk '/NAME/ {next;} {print $1}')
 for i in $projects
