@@ -39,7 +39,9 @@ outlabel "## Kubernetes get nodes"
 spacedel
 outlabel "### NODOS"
 spacedel
+outlabel "\`\`\`"
 kubectl get nodes -o wide >> $output
+outlabel "\`\`\`"
 spacedel
 
 outlabel "### Kubernetes config view"
