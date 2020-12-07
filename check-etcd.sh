@@ -17,17 +17,17 @@ rm -f $HOME/etcd-${ETCD_VER}-linux-amd64.tar.gz
 $HOME/etcd/etcd --version
 $HOME/etcd/etcdctl version
 
-CA="/etc/kubernetes/ssl/kube-ca.pem"
+CA="/etc/kubernetes/pki/etcd/ca.crt"
 if [ ! -f $CA ]; then
-	CA="/etc/kubernetes/pki/etcd/ca.crt"
+	CA="/etc/kubernetes/ssl/kube-ca.pem"
 fi
-CERT=$(ls /etc/kubernetes/ssl/kube-etcd-*.pem | grep -v key)
+CA="/etc/kubernetes/pki/etcd/server.crt"
 if [ ! -f $CERT ]; then
-	CA="/etc/kubernetes/pki/etcd/server.crt"
+	CERT=$(ls /etc/kubernetes/ssl/kube-etcd-*.pem | grep -v key)
 fi
-KEY=$(ls /etc/kubernetes/ssl/kube-etcd-*-key.pem)
+KEY="/etc/kubernetes/pki/etcd/server.key"
 if [ ! -f $KEY ]; then
-	KEY="/etc/kubernetes/pki/etcd/server.key"
+	KEY=$(ls /etc/kubernetes/ssl/kube-etcd-*-key.pem)
 fi
 FILE=etcd-salud-$(hostname).log
 
