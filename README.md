@@ -2,7 +2,7 @@
 
 ## Usage:
 
-### For Openstack
+### Para Openstack
 
 Hacer sesión en Openstack con rol de admin sobre el tenant admin, típicamente con :
 
@@ -16,7 +16,7 @@ time nice -n 19 ./ostack-assessment.sh
 ```
 
 
-### For Kubernetes
+### Para Kubernetes
 
 Se requiere un kubeconfig con permisos de cluster-admin.
 
@@ -30,11 +30,18 @@ Este comando puede poner carga media a las controladoras de Kubernetes, no afect
 kubectl cluster-info dump > cluster.dump
 ```
 
+En cada nodo de etcd correr el script: 
+```
+./check-etcd.sh
+```
+
+
 ## Resultados
 
 Se generan tres archivos, se pueden comprimir considerablemente ya que sólo son salidas de texto.
 * output="rs-ostack-assessment.out"
 * output="rs-kubectl-assessment.out"
+* output="etcd-salud.log"
 * y la salida de cluster-info: cluster.dump
 
 ## Autor
