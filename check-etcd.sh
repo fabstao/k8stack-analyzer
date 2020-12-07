@@ -21,7 +21,7 @@ CA="/etc/kubernetes/pki/etcd/ca.crt"
 if [ ! -f $CA ]; then
 	CA="/etc/kubernetes/ssl/kube-ca.pem"
 fi
-CA="/etc/kubernetes/pki/etcd/server.crt"
+CERT="/etc/kubernetes/pki/etcd/server.crt"
 if [ ! -f $CERT ]; then
 	CERT=$(ls /etc/kubernetes/ssl/kube-etcd-*.pem | grep -v key)
 fi
