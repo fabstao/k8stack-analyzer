@@ -20,8 +20,9 @@ $HOME/etcd/etcdctl version
 CA="/etc/kubernetes/ssl/kube-ca.pem"
 CERT=$(ls /etc/kubernetes/ssl/kube-etcd-*.pem | grep -v key)
 KEY=$(ls /etc/kubernetes/ssl/kube-etcd-*-key.pem)
+FILE=etcd-salud-$(hostname).log
 
 # GET etcd health
-sudo $HOME/etcd/etcdctl endpoint health --endpoints=https://127.0.0.1:2379 --cacert=$CA --cert=$CERT --key=$KEY 2>&1 | tee etcd-salud.log
+sudo $HOME/etcd/etcdctl endpoint health --endpoints=https://127.0.0.1:2379 --cacert=$CA --cert=$CERT --key=$KEY 2>&1 | tee $FILE
 printf "\n\nEnviar archivo etcd-salud.log\n\n"
 
