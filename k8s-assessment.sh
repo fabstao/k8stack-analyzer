@@ -82,6 +82,18 @@ function istios {
 	outlabel "\`\`\`"
 }
 
+function pvcs {
+	namespaces=$(kubectl get ns -o jsonpath="{.items[*].metadata.name}")
+	spacedel
+	outlabel "\`\`\`"
+	for i in $namespaces
+	do
+		echo "**Namespace ${i}**" >> $output
+		kubectl get pvc -n $i >> $output
+	done
+	outlabel "\`\`\`"
+}
+
 echo "Iniciando..."
 
 outlabel "# Kubernetes Assessment - RACKSPACE"
@@ -126,6 +138,15 @@ spacedel
 outlabel "\`\`\`"
 kubectl get svc -o wide --all-namespaces >> $output
 outlabel "\`\`\`"
+spacedel
+
+outlabel "### Kubernetes Storage"
+spacedel
+outlabel "\`\`\`"
+kubectl get pv >> $output
+outlabel "\`\`\`"
+spacedel
+pvcs
 spacedel
 
 outlabel "### Kubernetes metrics"
