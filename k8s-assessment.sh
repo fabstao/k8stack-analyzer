@@ -20,13 +20,51 @@ function outlabel {
 function crashedpods {
 	crashed=$(kubectl get pods -n $1 | egrep -i "(loop|error|pending|waiting)")
 	spacedel
-	outlabel "*Pods con fallas on $1*"
+	outlabel "*Failed Pods on $1*"
 	spacedel
 	outlabel "\`\`\`"
 	for i in $crashed
 	do
 		echo "Pod $i"
 		kubectl logs $i >> $output
+	done		
+	outlabel "\`\`\`"
+}
+
+function ingresses {
+	namespaces=$(kubectl get ns -o jsonpath="{.items[*].metadata.name}")
+	spacedel
+	outlabel "\`\`\`"
+	for i in $namespaces
+	do
+		echo "**Namespace ${i}**" >> $output
+		kubectl get ingress -n $i >> $output
+	done		
+	outlabel "\`\`\`"
+}
+
+function desnodes {
+	nodes=$(kubectl get nodes -o jsonpath="{.items[*].metadata.name}")
+	spacedel
+	outlabel "\`\`\`"
+	for i in $nodes
+	do
+		echo >> $output
+		echo "**Node ${i}**" >> $output
+		echo >> $output
+		kubectl describe node $i >> $output
+	done		
+	outlabel "\`\`\`"
+}
+
+function caliendp {
+	namespaces=$(kubectl get ns -o jsonpath="{.items[*].metadata.name}")
+	spacedel
+	outlabel "\`\`\`"
+	for i in $namespaces
+	do
+		echo "**Namespace ${i}**" >> $output
+		calicoctl get workloadEndpoint -n $i >> $output
 	done		
 	outlabel "\`\`\`"
 }
@@ -42,6 +80,11 @@ spacedel
 outlabel "\`\`\`"
 kubectl get nodes -o wide >> $output
 outlabel "\`\`\`"
+spacedel
+
+outlabel "### Kubernetes Nodes"
+spacedel
+desnodes
 spacedel
 
 outlabel "### Kubernetes config view"
@@ -89,6 +132,11 @@ kubectl api-resources -o wide  >> $output
 outlabel "\`\`\`"
 spacedel
 
+outlabel "### Kubernetes Ingress"
+spacedel
+ingresses
+spacedel
+
 outlabel "### Checking logs from failed pods"
 spacedel
 projects=$(kubectl get namespaces | awk '/NAME/ {next;} {print $1}')
@@ -96,3 +144,16 @@ for i in $projects
 do
 	crashedpods $i	
 done
+
+outlabel "### Calico nodes"
+spacedel
+outlabel "\`\`\`"
+calicoctl get node  >> $output
+outlabel "\`\`\`"
+spacedel
+
+outlabel "### Calico workload Endpoints"
+spacedel
+caliendp
+spacedel
+
