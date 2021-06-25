@@ -69,6 +69,19 @@ function caliendp {
 	outlabel "\`\`\`"
 }
 
+function istios {
+	namespaces=$(kubectl get ns -o jsonpath="{.items[*].metadata.name}")
+	spacedel
+	outlabel "\`\`\`"
+	for i in $namespaces
+	do
+		echo "**Namespace ${i}**" >> $output
+		kubectl get virtualservices -n $i >> $output
+		kubectl get gateways -n $i >> $output
+	done		
+	outlabel "\`\`\`"
+}
+
 echo "Iniciando..."
 
 outlabel "# Kubernetes Assessment - RACKSPACE"
@@ -137,13 +150,10 @@ spacedel
 ingresses
 spacedel
 
-outlabel "### Checking logs from failed pods"
+outlabel "### Kubernetes Istio"
 spacedel
-projects=$(kubectl get namespaces | awk '/NAME/ {next;} {print $1}')
-for i in $projects
-do
-	crashedpods $i	
-done
+istios
+spacedel
 
 outlabel "### Calico nodes"
 spacedel
@@ -156,4 +166,12 @@ outlabel "### Calico workload Endpoints"
 spacedel
 caliendp
 spacedel
+
+outlabel "### Checking logs from failed pods"
+spacedel
+projects=$(kubectl get namespaces | awk '/NAME/ {next;} {print $1}')
+for i in $projects
+do
+	crashedpods $i	
+done
 
